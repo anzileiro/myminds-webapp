@@ -1,0 +1,27 @@
+{
+  "name": "myminds-webapp",
+  "version": "1.0.0",
+  "description": "MyMinds webapp v1",
+  "engines": {
+    "node": "4.4.5",
+    "npm": "2.15.4"
+  },
+  "main": "server.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anzileiro/myminds-webapp.git"
+  },
+  "author": "Anderson L. Ribeiro Anzileiro <anderson.anzileiro@gmail.com>",
+  "license": "MIT",
+    "bugs": {
+    "url": "https://github.com/anzileiro/myminds-webapp/issues"
+  },
+  "homepage": "https://github.com/anzileiro/myminds-webapp#myminds-webapp",
+  "dependencies": {
+    "hapi": "13.4.1"
+  }
+}
