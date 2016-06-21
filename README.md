@@ -1,1 +1,1 @@
-MyMinds - WebApp v1.0
+# MyMinds - WebApp v1.0
