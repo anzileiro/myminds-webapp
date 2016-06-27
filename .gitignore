@@ -41,3 +41,4 @@ jspm_packages
 typings
 .eslintrc.json
 jsconfig.json
+.DS_Store

@@ -1,5 +1,5 @@
 <div ng-controller="noteController">
     <div>
-        <textarea class="form-control" rows="27" style="resize: none;"></textarea>
+        <textarea ng-change="typing(this)" ng-model="note" ng-trim="false" ng-model-options="{ debounce: 2000 }" class="form-control" rows="27" style="resize: none;"></textarea>
     </div>
 </div>

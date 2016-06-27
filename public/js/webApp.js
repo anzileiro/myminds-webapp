@@ -2,13 +2,14 @@
 
 var utils = {
     'guid': function () {
-        function uuid() {
+        function uuid () {
             return Math.floor((1 + Math.random()) * 0x10000)
-                       .toString(20)
-                       .substring(1)
+                                       .toString(20)
+                                       .substring(1)
         }
         return (uuid() + uuid() + uuid() + uuid()).substring(0, 10)
-    }
+    },
+    'hash': undefined
 }
 
 var myMindsApp = angular.module('myMindsApp', ['ngRoute'])
@@ -36,13 +37,34 @@ myMindsApp.controller('homeController', function ($scope) {
     $scope.title = 'title'
 })
 
-myMindsApp.controller('noteController', function ($scope, $location, $routeParams) {
+myMindsApp.controller('noteController', function ($scope, $location, $routeParams, $http) {
+    
     if ($location.path() === '/note/') {
-        $location.path('/note/' + utils.guid())
+        utils.hash = utils.guid()
+        $location.path('/note/' + utils.hash)
     } else {
         var hash = $routeParams.hash || ''
         if (!(hash.length === 10)) {
-            $location.path('/note/' + utils.guid())
+            utils.hash = utils.guid()
+            $location.path('/note/' + utils.hash)
         }
+    }
+
+    $scope.typing = function () {
+        var request = { 
+            method: 'POST', 
+            url: 'http://localhost:9000/v1/note' ,
+            data: {
+                hash: utils.hash,
+                note: $scope.note
+            }
+        }
+        
+        $http(request)
+            .then(function (data) {
+                console.log(data)
+            }, function (err) {
+                console.log(err)
+            })
     }
 })
