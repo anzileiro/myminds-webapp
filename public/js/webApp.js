@@ -34,11 +34,11 @@ myMindsApp.config(function ($routeProvider) {
 })
 
 myMindsApp.controller('homeController', function ($scope) {
-    $scope.title = 'title'
+    
 })
 
 myMindsApp.controller('noteController', function ($scope, $location, $routeParams, $http) {
-    
+
     if ($location.path() === '/note/') {
         utils.hash = utils.guid()
         $location.path('/note/' + utils.hash)
@@ -47,6 +47,17 @@ myMindsApp.controller('noteController', function ($scope, $location, $routeParam
         if (!(hash.length === 10)) {
             utils.hash = utils.guid()
             $location.path('/note/' + utils.hash)
+        } else {
+            var request = { 
+                method: 'GET', 
+                url: 'http://localhost:9000/v1/note/' + $routeParams.hash
+            }
+            
+            $http(request).then(function (data) {
+                $scope.note = data.data.data.tt_note
+            }, function (err) {
+                console.log(err)  
+            })
         }
     }
 
@@ -60,11 +71,10 @@ myMindsApp.controller('noteController', function ($scope, $location, $routeParam
             }
         }
         
-        $http(request)
-            .then(function (data) {
-                console.log(data)
-            }, function (err) {
-                console.log(err)
-            })
+        $http(request).then(function (data) {
+            console.log(data)
+        }, function (err) {
+            console.log(err)
+        })
     }
 })
